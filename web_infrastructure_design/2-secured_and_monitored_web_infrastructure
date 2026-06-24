@@ -1,0 +1,64 @@
+# Secured and Monitored Web Infrastructure
+
+## For every additional element, why you are adding it
+
+- Firewalls:
+  I added three firewalls to filter network traffic and protect the infrastructure from unauthorized access.
+
+- SSL Certificate:
+  I added an SSL certificate to serve www.foobar.com over HTTPS and encrypt traffic between the user and the website.
+
+- Monitoring Clients:
+  I added monitoring clients to collect data from the servers and send it to a monitoring service such as Sumo Logic.
+
+## What are firewalls for?
+
+Firewalls are used to control incoming and outgoing network traffic based on security rules.
+
+They help protect servers by allowing only authorized traffic and blocking suspicious or unwanted connections.
+
+## Why is the traffic served over HTTPS?
+
+Traffic is served over HTTPS to encrypt communication between the user’s browser and the website.
+
+This protects sensitive data from being read or modified by attackers.
+
+## What is monitoring used for?
+
+Monitoring is used to track the health and performance of the infrastructure.
+
+It helps detect problems such as server downtime, high CPU usage, high memory usage, slow response time, or database issues.
+
+## How is the monitoring tool collecting data?
+
+The monitoring client runs on each server.
+
+It collects logs, metrics, and performance data, then sends them to a monitoring platform such as Sumo Logic.
+
+## How to monitor web server QPS?
+
+To monitor the web server QPS, I would configure the monitoring client to collect Nginx access logs or Nginx metrics.
+
+Then I would calculate the number of HTTP requests per second and display it in the monitoring dashboard.
+
+## Issues with this infrastructure
+
+### Why terminating SSL at the load balancer level is an issue
+
+Terminating SSL at the load balancer means traffic is encrypted only between the user and the load balancer.
+
+After that, traffic between the load balancer and the servers may be unencrypted.
+
+This can be a security issue if the internal network is compromised.
+
+### Why having only one MySQL server capable of accepting writes is an issue
+
+Having only one MySQL server capable of accepting writes creates a Single Point of Failure.
+
+If the Primary database fails, the application cannot perform write operations such as INSERT, UPDATE, or DELETE.
+
+### Why having servers with all the same components might be a problem
+
+Having the database, web server, and application server on the same machines can be a problem because each component competes for the same CPU, memory, and disk resources.
+
+It also makes scaling harder because the web layer, application layer, and database layer may need to scale differently.
