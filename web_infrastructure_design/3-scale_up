@@ -1,0 +1,31 @@
+# Scale Up Web Infrastructure
+
+## For every additional element, why you are adding it
+
+- Additional server:
+  I added one more server to separate infrastructure components and reduce resource competition between the web server, application server, and database.
+
+- Second load balancer:
+  I added a second HAProxy load balancer and configured it as a cluster with the first load balancer to remove the load balancer as a Single Point of Failure.
+
+- Load balancer cluster:
+  The two load balancers work together to improve availability. If one load balancer fails, the other can continue routing traffic to the servers.
+
+- Separate web server:
+  I separated the web server into its own server so Nginx can focus on handling HTTP/HTTPS requests and serving static content.
+
+- Separate application server:
+  I separated the application server into its own server so it can focus on running the application logic and code base.
+
+- Separate database server:
+  I separated the database into its own server so MySQL can use dedicated resources for storing, reading, and writing data.
+
+## Application server vs Web server
+
+A web server, such as Nginx, handles incoming HTTP/HTTPS requests, serves static files, and forwards dynamic requests to the application server.
+
+An application server runs the application code and business logic. It processes dynamic requests and communicates with the database when data is needed.
+
+## Summary
+
+This infrastructure improves scalability, availability, and performance by separating the main components into different servers and adding a second load balancer configured as a cluster.
